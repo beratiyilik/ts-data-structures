@@ -1,0 +1,24 @@
+{
+  "name": "ts-data-structures",
+  "version": "1.0.0",
+  "description": "TypeScript Data Structures is a collection of efficient and type-safe data structures and algorithms implemented in TypeScript.",
+  "keywords": [],
+  "author": "Berat İyilik <***> (https://beratiyilik.com/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beratiyilik/ts-data-structures.git"
+  },
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node-esm src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
