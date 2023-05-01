@@ -102,7 +102,7 @@ export default class PriorityQueue<T> {
   }
 
   clone(): PriorityQueue<T> {
-    const newQueue = new PriorityQueue<T>(this.capacity);
+    const newQueue = new PriorityQueue<T>(<number>this.capacity);
     let currentNode = this.head;
     while (currentNode) {
       newQueue.enqueue(deepClone(currentNode.value), currentNode.priority);

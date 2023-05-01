@@ -1,5 +1,5 @@
-import { SinglyNode } from '../node/index.ts';
-import { deepClone } from '../util.ts';
+import { SinglyNode } from "../node/index.ts";
+import { deepClone } from "../util.ts";
 
 // queue first-in-first-out FIFO
 export default class Queue<T> {
@@ -95,7 +95,7 @@ export default class Queue<T> {
   }
 
   clone(): Queue<T> {
-    const clonedQueue = new Queue<T>(this.capacity);
+    const clonedQueue = new Queue<T>(<number>this.capacity);
 
     let currentNode = this.head;
     while (currentNode) {

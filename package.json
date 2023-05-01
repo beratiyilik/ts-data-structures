@@ -2,7 +2,17 @@
   "name": "ts-data-structures",
   "version": "1.0.0",
   "description": "TypeScript Data Structures is a collection of efficient and type-safe data structures and algorithms implemented in TypeScript.",
-  "keywords": [],
+  "keywords": [
+    "data structures",
+    "efficiency",
+    "collections",
+    "queues",
+    "stacks",
+    "linked lists",
+    "trees",
+    "heaps",
+    "graphs"
+  ],
   "author": "Berat İyilik <***> (https://beratiyilik.com/)",
   "license": "MIT",
   "repository": {

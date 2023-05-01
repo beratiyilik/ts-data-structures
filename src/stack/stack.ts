@@ -1,5 +1,5 @@
-import { SinglyNode } from './../node/index.ts';
-import { deepClone } from './../util.ts';
+import { SinglyNode } from "./../node/index.ts";
+import { deepClone } from "./../util.ts";
 
 // stack last-in-first-out LIFO
 export default class Stack<T> {
@@ -85,7 +85,7 @@ export default class Stack<T> {
   }
 
   clone(): Stack<T> {
-    const clonedStack = new Stack<T>(this.capacity);
+    const clonedStack = new Stack<T>(<number>this.capacity);
     let currentNode = this.head;
 
     while (currentNode) {
@@ -100,9 +100,7 @@ export default class Stack<T> {
     otherStack: Stack<T>,
     compareFunction?: (a: T, b: T) => boolean
   ): boolean {
-    if (this.size !== otherStack.size) {
-      return false;
-    }
+    if (this.size !== otherStack.size) return false;
 
     const defaultCompareFunction = (a: T, b: T) => a === b;
     const compare = compareFunction || defaultCompareFunction;
@@ -149,7 +147,7 @@ export default class Stack<T> {
   }
 
   map<U>(mapper: (value: T, index: number, stack: Stack<T>) => U): Stack<U> {
-    const mappedStack = new Stack<U>(this.capacity);
+    const mappedStack = new Stack<U>(<number>this.capacity);
     let currentNode = this.head;
     let index = 0;
 
@@ -165,7 +163,7 @@ export default class Stack<T> {
   filter(
     predicate: (value: T, index: number, stack: Stack<T>) => boolean
   ): Stack<T> {
-    const filteredStack = new Stack<T>(this.capacity);
+    const filteredStack = new Stack<T>(<number>this.capacity);
     let currentNode = this.head;
     let index = 0;
 

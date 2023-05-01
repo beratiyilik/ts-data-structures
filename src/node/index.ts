@@ -3,7 +3,7 @@ import {
   IPriorityDoublyNode,
   ISinglyNode,
   ITripleNode,
-} from "../types/node.ts";
+} from "../interface/node.ts";
 
 export class SinglyNode<T> implements ISinglyNode<T> {
   value: T;

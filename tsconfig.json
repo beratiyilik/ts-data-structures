@@ -5,16 +5,17 @@
     "lib": [
       "ES2020"
     ],
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "node",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "sourceMap": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "strict": true,
-    "moduleResolution": "node",
-    "rootDir": "./src",
-    "outDir": "./dist"
+    "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true
   },
   "include": [
     "src/**/*.ts"

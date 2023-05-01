@@ -9,12 +9,12 @@ export function deepClone<T>(object: T, cache: Map<any, any> = new Map()): T {
     return new RegExp(object.source, object.flags) as unknown as T;
 
   if (object instanceof Array) {
-    const clonedArray = [] as unknown as T;
+    const clonedArray = [] as unknown as T[];
     cache.set(object, clonedArray);
     for (let i = 0; i < object.length; i++)
       clonedArray[i] = deepClone(object[i], cache);
 
-    return clonedArray;
+    return clonedArray as T;
   }
 
   const clonedObject = Object.create(Object.getPrototypeOf(object));

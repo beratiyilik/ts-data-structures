@@ -1,5 +1,5 @@
-import { DoublyNode } from './../node/index.ts';
-import { deepClone } from './../util.ts';
+import { DoublyNode } from "./../node/index.ts";
+import { deepClone } from "./../util.ts";
 
 export default class LinkedList<T> {
   private head: DoublyNode<T> | null = null;
@@ -213,7 +213,7 @@ export default class LinkedList<T> {
   }
 
   clone(): LinkedList<T> {
-    const clonedList = new LinkedList<T>(this.capacity);
+    const clonedList = new LinkedList<T>(<number>this.capacity);
 
     let current = this.head;
     while (current) {
@@ -230,11 +230,14 @@ export default class LinkedList<T> {
   ): boolean {
     if (this.size !== otherLinkedList.size) return false;
 
+    const defaultCompareFunction = (a: T, b: T) => a === b;
+    const compare = compareFunction || defaultCompareFunction;
+
     let thisCurrent = this.head;
     let otherCurrent = otherLinkedList.head;
 
     while (thisCurrent && otherCurrent) {
-      if (!compareFunction(thisCurrent.value, otherCurrent.value)) return false;
+      if (!compare(thisCurrent.value, otherCurrent.value)) return false;
 
       thisCurrent = thisCurrent.next;
       otherCurrent = otherCurrent.next;
@@ -274,7 +277,7 @@ export default class LinkedList<T> {
   map<U>(
     mapper: (value: T, index: number, list: LinkedList<T>) => U
   ): LinkedList<U> {
-    const newList = new LinkedList<U>(this.capacity);
+    const newList = new LinkedList<U>(<number>this.capacity);
     let current = this.head;
     let index = 0;
     while (current) {
@@ -288,7 +291,7 @@ export default class LinkedList<T> {
   filter(
     predicate: (value: T, index: number, list: LinkedList<T>) => boolean
   ): LinkedList<T> {
-    const newList = new LinkedList<T>(this.capacity);
+    const newList = new LinkedList<T>(<number>this.capacity);
     let current = this.head;
     let index = 0;
     while (current) {

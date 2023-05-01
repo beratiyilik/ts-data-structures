@@ -3,10 +3,8 @@ export * from "./queue";
 export * from "./stack";
 export * from "./linked-list";
 */
-export { Queue, PriorityQueue } from "./queue";
+import { Queue, PriorityQueue } from "./queue/index.ts";
 
-
-/*
 class User {
   id: number;
   name: string;
@@ -21,6 +19,22 @@ class User {
   }
 }
 
+const queue = new Queue<User>();
+
+queue.enqueue(new User(1, 'Alice', 'alice@example.com', 30));
+queue.enqueue(new User(2, 'Bob', 'bob@example.com', 35));
+queue.enqueue(new User(3, 'Charlie', 'charlie@example.com', 25));
+queue.enqueue(new User(4, 'David', 'david@example.com', 40));
+queue.enqueue(new User(5, 'Eve', 'eve@example.com', 29));
+queue.enqueue(new User(6, 'Frank', 'frank@example.com', 31));
+queue.enqueue(new User(7, 'Grace', 'grace@example.com', 28));
+queue.enqueue(new User(8, 'Helen', 'helen@example.com', 33));
+
+queue.forEach(user => {
+  console.log(user);
+});
+
+/*
 const usersList = new LinkedList<User>();
 
 usersList.append(new User(1, 'Alice', 'alice@example.com', 30));
