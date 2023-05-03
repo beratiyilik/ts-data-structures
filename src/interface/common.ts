@@ -80,8 +80,3 @@ export interface ICollectionOperations<T> {
 export interface ISortable<T> {
   sort(comparer?: (a: T, b: T) => number): void;
 }
-
-export interface ParserOptions<ValueType> {
-  reviver?: (key: string, value: any) => any;
-  constructItem?: (item: any) => ValueType;
-}

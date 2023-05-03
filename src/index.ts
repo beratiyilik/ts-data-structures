@@ -1,11 +1,11 @@
 export * from "./queue/index.ts";
 export * from "./stack/index.ts";
 export * from "./linked-list/index.ts";
+import "./extensions.ts";
 /** */
 import { Queue, PriorityQueue } from "./queue/index.ts";
 import { Stack } from "./stack/index.ts";
 import { LinkedList } from "./linked-list/index.ts";
-import { Parser } from "./util/index.ts";
 
 class User {
   id: number;
@@ -47,7 +47,12 @@ usersList.append(new User(8, 'Helen', 'helen@example.com', 33));
 
 const text = `[{"id":1,"name":"Alice","email":"alice@example.com","age":30},{"id":2,"name":"Bob","email":"bob@example.com","age":35}]`;
 
-const users = Parser.toLinkedList<User>(text);
+console.log({ originalText: text });
+
+const users = JSON.parseToStack<User>(text, null, ({ id, ...rest }) => ({
+  id: 1000 + id,
+  ...rest,
+}));
 
 for (const user of users) {
   console.log({ user });
