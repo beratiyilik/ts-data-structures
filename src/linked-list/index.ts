@@ -1,3 +1,3 @@
-import LinkedList from "./linked-list";
+import LinkedList from "./linked-list.ts";
 
 export { LinkedList };

@@ -1,3 +1,5 @@
+export { default as Parser } from "./parser.ts";
+
 export function deepClone<T>(object: T, cache: Map<any, any> = new Map()): T {
   if (typeof object !== "object" || object === null) return object;
 

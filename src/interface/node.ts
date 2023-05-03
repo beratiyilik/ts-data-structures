@@ -1,10 +1,4 @@
-interface IValue<T> {
-  value: T;
-}
-
-interface IPriority {
-  priority: number;
-}
+import { IValue, IPriority } from "./common.ts";
 
 export interface ISinglyNode<T> extends IValue<T> {
   next: ISinglyNode<T> | null;

@@ -1,8 +1,9 @@
+import { IStack } from "../interface/stack.ts";
 import { SinglyNode } from "./../node/index.ts";
-import { deepClone } from "./../util.ts";
+import { deepClone } from "./../util/index.ts";
 
-// stack last-in-first-out LIFO
-export default class Stack<T> {
+// LIFO: last-in-first-out
+export default class Stack<T> implements IStack<T> {
   private head: SinglyNode<T> | null = null;
   private size: number = 0;
   private capacity: number | null = null;
@@ -13,40 +14,33 @@ export default class Stack<T> {
     if (capacity) this.capacity = capacity;
   }
 
-  push(value: T): boolean {
-    if (this.isFull()) return false;
+  *[Symbol.iterator](): Iterator<T, any, undefined> {
+    let current: SinglyNode<T> | null = this.head;
+    if (!current) return;
+    while (current) {
+      yield current.value;
+      current = current.next;
+    }
+  }
 
-    const newNode = new SinglyNode<T>(value, this.head);
+  push(data: T): boolean {
+    if (this.isFull()) return false;
+    const newNode = new SinglyNode<T>(data, this.head);
     this.head = newNode;
     this.size++;
     return true;
   }
 
-  pushAll(values: Iterable<T>): boolean {
-    const valuesArray = Array.from(values);
-    if (
-      this.capacity !== null &&
-      this.size + valuesArray.length > this.capacity
-    )
-      return false;
-
-    for (const value of valuesArray) this.push(value);
-
-    return true;
-  }
-
   pop(): T | null {
     if (this.isEmpty()) return null;
-
-    const removedNode = this.head!;
-    this.head = this.head!.next;
+    const poppedNode = this.head;
+    this.head = this.head?.next || null;
     this.size--;
-
-    return removedNode.value;
+    return poppedNode?.value || null;
   }
 
   peek(): T | null {
-    return this.head ? this.head.value : null;
+    return this.head?.value || null;
   }
 
   isEmpty(): boolean {
@@ -54,212 +48,143 @@ export default class Stack<T> {
   }
 
   isFull(): boolean {
-    return this.capacity !== null && this.size === this.capacity;
+    return this.capacity !== null && this.size >= this.capacity;
   }
 
   count(predicate?: (value: T) => boolean): number {
     if (!predicate) return this.size;
-
-    let count = 0;
-    let currentNode = this.head;
-    while (currentNode) {
-      if (predicate(currentNode.value)) {
-        count++;
-      }
-      currentNode = currentNode.next;
-    }
-    return count;
+    return Array.from(this).filter(predicate).length;
   }
 
   clear(): void {
-    let currentNode = this.head;
-
-    while (currentNode) {
-      const nextNode = currentNode.next;
-      currentNode.next = null;
-      currentNode = nextNode;
-    }
-
     this.head = null;
     this.size = 0;
   }
 
-  clone(): Stack<T> {
-    const clonedStack = new Stack<T>(<number>this.capacity);
-    let currentNode = this.head;
-
-    while (currentNode) {
-      clonedStack.push(deepClone(currentNode.value));
-      currentNode = currentNode.next;
-    }
-
+  clone(): IStack<T> {
+    const clonedStack = new Stack<T>(this.capacity);
+    for (const value of this) clonedStack.push(deepClone(value));
     return clonedStack;
   }
 
-  equals(
-    otherStack: Stack<T>,
-    compareFunction?: (a: T, b: T) => boolean
-  ): boolean {
-    if (this.size !== otherStack.size) return false;
+  equals(other: IStack<T>, comparer?: (a: T, b: T) => boolean): boolean {
+    if (this.size !== other.count()) return false;
+    if (!comparer) comparer = (a, b) => a === b;
 
-    const defaultCompareFunction = (a: T, b: T) => a === b;
-    const compare = compareFunction || defaultCompareFunction;
+    const otherIterator = other[Symbol.iterator]();
 
-    let currentNodeA = this.head;
-    let currentNodeB = otherStack.head;
-
-    while (currentNodeA && currentNodeB) {
-      if (!compare(currentNodeA.value, currentNodeB.value)) {
-        return false;
-      }
-      currentNodeA = currentNodeA.next;
-      currentNodeB = currentNodeB.next;
+    for (const thisValue of this) {
+      const otherValue = otherIterator.next().value;
+      if (!comparer(thisValue, otherValue)) return false;
     }
 
     return true;
   }
 
   toArray(): T[] {
-    const result: T[] = [];
-    let currentNode = this.head;
-
-    while (currentNode) {
-      result.push(currentNode.value);
-      currentNode = currentNode.next;
-    }
-
-    return result;
+    return Array.from(this);
   }
 
-  toString(): string {
-    return this.toArray().toString();
+  toString(
+    replacer?: (
+      this: any,
+      key: string,
+      value: any
+    ) => any | (number | string)[] | null,
+    space?: string | number
+  ): string {
+    return JSON.stringify(this.toArray(), replacer, space);
   }
 
-  forEach(callback: (value: T, index: number, stack: Stack<T>) => void): void {
-    let currentNode = this.head;
+  forEach(
+    callback: (value: T, index: number, collection: IStack<T>) => void
+  ): void {
     let index = 0;
-
-    while (currentNode) {
-      callback(currentNode.value, index, this);
-      currentNode = currentNode.next;
+    for (const value of this) {
+      callback(value, index, this);
       index++;
     }
   }
 
-  map<U>(mapper: (value: T, index: number, stack: Stack<T>) => U): Stack<U> {
-    const mappedStack = new Stack<U>(<number>this.capacity);
-    let currentNode = this.head;
-    let index = 0;
-
-    while (currentNode) {
-      mappedStack.push(mapper(currentNode.value, index, this));
-      currentNode = currentNode.next;
-      index++;
-    }
-
+  map<U>(
+    mapper: (value: T, index: number, collection: IStack<T>) => U
+  ): IStack<U> {
+    const mappedStack = new Stack<U>(this.capacity);
+    this.forEach((value, index) => {
+      mappedStack.push(mapper(value, index, this));
+    });
     return mappedStack;
   }
 
   filter(
-    predicate: (value: T, index: number, stack: Stack<T>) => boolean
-  ): Stack<T> {
-    const filteredStack = new Stack<T>(<number>this.capacity);
-    let currentNode = this.head;
-    let index = 0;
-
-    while (currentNode) {
-      if (predicate(currentNode.value, index, this)) {
-        filteredStack.push(currentNode.value);
-      }
-      currentNode = currentNode.next;
-      index++;
-    }
-
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean
+  ): IStack<T> {
+    const filteredStack = new Stack<T>(this.capacity);
+    this.forEach((value, index) => {
+      if (predicate(value, index, this)) filteredStack.push(value);
+    });
     return filteredStack;
   }
 
   some(
-    predicate: (value: T, index: number, stack: Stack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean
   ): boolean {
-    let currentNode = this.head;
     let index = 0;
-
-    while (currentNode) {
-      if (predicate(currentNode.value, index, this)) {
-        return true;
-      }
-      currentNode = currentNode.next;
+    for (const value of this) {
+      if (predicate(value, index, this)) return true;
       index++;
     }
-
     return false;
   }
 
   every(
-    predicate: (value: T, index: number, stack: Stack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean
   ): boolean {
-    let currentNode = this.head;
     let index = 0;
-
-    while (currentNode) {
-      if (!predicate(currentNode.value, index, this)) {
-        return false;
-      }
-      currentNode = currentNode.next;
+    for (const value of this) {
+      if (!predicate(value, index, this)) return false;
       index++;
     }
-
     return true;
   }
 
   reduce<U>(
-    reducer: (accumulator: U, value: T, index: number, stack: Stack<T>) => U,
+    reducer: (
+      accumulator: U,
+      value: T,
+      index: number,
+      collection: IStack<T>
+    ) => U,
     initialValue: U
   ): U {
-    let currentNode = this.head;
     let accumulator = initialValue;
     let index = 0;
-
-    while (currentNode) {
-      accumulator = reducer(accumulator, currentNode.value, index, this);
-      currentNode = currentNode.next;
+    for (const value of this) {
+      accumulator = reducer(accumulator, value, index, this);
       index++;
     }
-
     return accumulator;
   }
 
   find(
-    predicate: (value: T, index: number, stack: Stack<T>) => boolean
-  ): T | null {
-    let currentNode = this.head;
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean
+  ): T {
     let index = 0;
-
-    while (currentNode) {
-      if (predicate(currentNode.value, index, this)) {
-        return currentNode.value;
-      }
-      currentNode = currentNode.next;
+    for (const value of this) {
+      if (predicate(value, index, this)) return value;
       index++;
     }
-
     return null;
   }
 
   findIndex(
-    predicate: (value: T, index: number, stack: Stack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean
   ): number {
-    let currentNode = this.head;
     let index = 0;
-
-    while (currentNode) {
-      if (predicate(currentNode.value, index, this)) {
-        return index;
-      }
-      currentNode = currentNode.next;
+    for (const value of this) {
+      if (predicate(value, index, this)) return index;
       index++;
     }
-
     return -1;
   }
 }
