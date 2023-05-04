@@ -1,4 +1,4 @@
-name: Publish ts-data-structures as a NPM package
+name: Publish to NPM
 
 on:
   release:
