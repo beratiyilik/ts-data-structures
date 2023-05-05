@@ -1,7 +1,7 @@
-import { ILinkedList, IQueue, IStack } from "./../interface/index.ts";
-import { LinkedList } from "./../linked-list/index.ts";
-import { Queue } from "./../queue/index.ts";
-import { Stack } from "./../stack/index.ts";
+import { ILinkedList, IQueue, IStack } from './../interface/index';
+import { LinkedList } from './../linked-list/index';
+import { Queue } from './../queue/index';
+import { Stack } from './../stack/index';
 
 export default class Parser {
   private static validateParsedArray(parsedArray: any[]): boolean {
@@ -11,7 +11,7 @@ export default class Parser {
   public static parseToStack<T>(
     text: string,
     reviver?: (key: string, value: any) => any,
-    constructItem?: (item: any) => T
+    constructItem?: (item: any) => T,
   ): IStack<T> | null {
     const parsedArray = JSON.parse(text, reviver);
 
@@ -30,7 +30,7 @@ export default class Parser {
   public static parseToQueue<T>(
     text: string,
     reviver?: (key: string, value: any) => any,
-    constructItem?: (item: any) => T
+    constructItem?: (item: any) => T,
   ): IQueue<T> | null {
     const parsedArray = JSON.parse(text, reviver);
 
@@ -48,7 +48,7 @@ export default class Parser {
   public static parseToLinkedList<T>(
     text: string,
     reviver?: (key: string, value: any) => any,
-    constructItem?: (item: any) => T
+    constructItem?: (item: any) => T,
   ): ILinkedList<T> {
     const parsedArray = JSON.parse(text, reviver);
 

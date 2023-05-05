@@ -1,4 +1,4 @@
-export * from "./queue/index.ts";
-export * from "./stack/index.ts";
-export * from "./linked-list/index.ts";
-import "./extensions.ts";
+export * from './queue/index';
+export * from './stack/index';
+export * from './linked-list/index';
+import './extensions';

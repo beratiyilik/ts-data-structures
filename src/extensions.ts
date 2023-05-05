@@ -1,24 +1,24 @@
-import { IStack, IQueue, ILinkedList } from "./interface/index.ts";
-import { Parser } from "./util/index.ts";
+import { IStack, IQueue, ILinkedList } from './interface/index';
+import { Parser } from './util/index';
 
 declare global {
   interface JSON {
     parseToStack<T>(
       text: string,
       reviver?: (key: string, value: any) => any,
-      constructItem?: (item: any) => T
+      constructItem?: (item: any) => T,
     ): IStack<T> | null;
 
     parseToQueue<T>(
       text: string,
       reviver?: (key: string, value: any) => any,
-      constructItem?: (item: any) => T
+      constructItem?: (item: any) => T,
     ): IQueue<T> | null;
 
     parseToLinkedList<T>(
       text: string,
       reviver?: (key: string, value: any) => any,
-      constructItem?: (item: any) => T
+      constructItem?: (item: any) => T,
     ): ILinkedList<T> | null;
   }
 }
@@ -26,7 +26,7 @@ declare global {
 JSON.parseToStack = function <T>(
   text: string,
   reviver?: (key: string, value: any) => any,
-  constructItem?: (item: any) => T
+  constructItem?: (item: any) => T,
 ): IStack<T> | null {
   return Parser.parseToStack<T>(text, reviver, constructItem);
 };
@@ -34,7 +34,7 @@ JSON.parseToStack = function <T>(
 JSON.parseToQueue = function <T>(
   text: string,
   reviver?: (key: string, value: any) => any,
-  constructItem?: (item: any) => T
+  constructItem?: (item: any) => T,
 ): IQueue<T> | null {
   return Parser.parseToQueue<T>(text, reviver, constructItem);
 };
@@ -42,7 +42,7 @@ JSON.parseToQueue = function <T>(
 JSON.parseToLinkedList = function <T>(
   text: string,
   reviver?: (key: string, value: any) => any,
-  constructItem?: (item: any) => T
+  constructItem?: (item: any) => T,
 ): ILinkedList<T> | null {
   return Parser.parseToLinkedList<T>(text, reviver, constructItem);
 };

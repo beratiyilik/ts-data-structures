@@ -1,8 +1,4 @@
-import {
-  ICollection,
-  ISortable,
-  ICollectionOperations,
-} from "./common.ts";
+import { ICollection, ISortable, ICollectionOperations } from './common';
 
 interface ILinkedListBase<T> extends ISortable<T> {
   insertAtBeginning(value: T): boolean;
@@ -19,15 +15,15 @@ export interface ILinkedList<T>
     ICollection<T>,
     ICollectionOperations<T> {
   get(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): T | null;
   remove(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): boolean;
   indexOf(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): number;
   traverseBackward(
-    callback: (value: T, index: number, collection: ILinkedList<T>) => void
+    callback: (value: T, index: number, collection: ILinkedList<T>) => void,
   ): void;
 }

@@ -1,4 +1,4 @@
-import { ICollection, ICollectionOperations } from "./common.ts";
+import { ICollection, ICollectionOperations } from './common';
 
 interface IStackBase<T> {
   push(data: T): boolean;

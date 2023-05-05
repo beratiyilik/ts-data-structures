@@ -19,17 +19,42 @@
     "type": "git",
     "url": "https://github.com/beratiyilik/ts-data-structures.git"
   },
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/beratiyilik/ts-data-structures#readme",
+  "bugs": {
+    "url": "https://github.com/beratiyilik/ts-data-structures/issues"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "ts-node-esm src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clear": "rm -rf ./dist",
+    "lint": "eslint ./src/ --ext .js,.jsx,.ts,.tsx",
+    "prettier": "prettier --config .prettierrc --write .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx ts-node ./src/index.ts",
+    "build": "npm run clear && tsc -p tsconfig.json",
+    "build:watch": "npm run clear && tsc -p tsconfig.json --watch",
+    "build:release": "npm run clear && tsc -p tsconfig.release.json"
+  },
+  "engines": {
+    "npm": ">=9.5.1",
+    "node": ">=18.16.0"
   },
   "devDependencies": {
     "@types/node": "^18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
+    "eslint": "^8.39.0",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "tslib": "^2.5.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   }
 }

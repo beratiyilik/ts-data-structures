@@ -1,4 +1,4 @@
-import Queue from "./queue.ts";
-import PriorityQueue from "./priority-queue.ts";
+import Queue from './queue';
+import PriorityQueue from './priority-queue';
 
 export { Queue, PriorityQueue };

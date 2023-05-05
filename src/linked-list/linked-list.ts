@@ -1,6 +1,7 @@
-import { ILinkedList } from "../interface/index.ts";
-import { DoublyNode } from "./../node/index.ts";
-import { deepClone } from "./../util/index.ts";
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+import { ILinkedList } from '../interface/index';
+import { DoublyNode } from './../node/index';
+import { deepClone } from './../util/index';
 
 export default class LinkedList<T> implements ILinkedList<T> {
   private head: DoublyNode<T> | null = null;
@@ -132,7 +133,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   remove(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): boolean {
     let current: DoublyNode<T> | null = this.head;
     if (!current) return false;
@@ -181,7 +182,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   get(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): T | null {
     let current: DoublyNode<T> | null = this.head;
     let index = 0;
@@ -196,7 +197,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   indexOf(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): number {
     let current: DoublyNode<T> | null = this.head;
     let index = 0;
@@ -211,7 +212,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   traverseBackward(
-    callback: (value: T, index: number, collection: ILinkedList<T>) => void
+    callback: (value: T, index: number, collection: ILinkedList<T>) => void,
   ): void {
     let current: DoublyNode<T> | null = this.tail;
     if (!current) return;
@@ -268,32 +269,32 @@ export default class LinkedList<T> implements ILinkedList<T> {
     replacer?: (
       this: any,
       key: string,
-      value: any
+      value: any,
     ) => any | (number | string)[] | null,
-    space?: string | number
+    space?: string | number,
   ): string {
     return JSON.stringify(this.toArray(), replacer, space);
   }
 
   forEach(
-    callback: (value: T, index: number, collection: ILinkedList<T>) => void
+    callback: (value: T, index: number, collection: ILinkedList<T>) => void,
   ): void {
     let index = 0;
-    for (let value of this) callback(value, index++, this);
+    for (const value of this) callback(value, index++, this);
   }
 
   map<U>(
-    mapper: (value: T, index: number, collection: ILinkedList<T>) => U
+    mapper: (value: T, index: number, collection: ILinkedList<T>) => U,
   ): ILinkedList<U> {
     const mappedLinkedList = new LinkedList<U>(this.capacity);
     this.forEach((value, index) =>
-      mappedLinkedList.insertAtEnd(mapper(value, index, this))
+      mappedLinkedList.insertAtEnd(mapper(value, index, this)),
     );
     return mappedLinkedList;
   }
 
   filter(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): LinkedList<T> {
     const filteredLinkedList = new LinkedList<T>(this.capacity);
     this.forEach((value, index) => {
@@ -303,7 +304,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   some(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): boolean {
     let index = 0;
     for (const value of this) {
@@ -314,7 +315,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   every(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): boolean {
     let index = 0;
     for (const value of this) {
@@ -329,9 +330,9 @@ export default class LinkedList<T> implements ILinkedList<T> {
       accumulator: U,
       value: T,
       index: number,
-      collection: ILinkedList<T>
+      collection: ILinkedList<T>,
     ) => U,
-    initialValue: U
+    initialValue: U,
   ): U {
     let accumulator = initialValue;
     let index = 0;
@@ -343,7 +344,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   find(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): T {
     let index = 0;
     for (const value of this) {
@@ -354,7 +355,7 @@ export default class LinkedList<T> implements ILinkedList<T> {
   }
 
   findIndex(
-    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean
+    predicate: (value: T, index: number, collection: ILinkedList<T>) => boolean,
   ): number {
     let index = 0;
     for (const value of this) {

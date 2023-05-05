@@ -1,6 +1,7 @@
-import { IQueue } from "../interface/index.ts";
-import { SinglyNode } from "../node/index.ts";
-import { deepClone } from "../util/index.ts";
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+import { IQueue } from '../interface/index';
+import { SinglyNode } from '../node/index';
+import { deepClone } from '../util/index';
 
 // FIFO: first-in-first-out
 export default class Queue<T> implements IQueue<T> {
@@ -95,22 +96,22 @@ export default class Queue<T> implements IQueue<T> {
     replacer?: (
       this: any,
       key: string,
-      value: any
+      value: any,
     ) => any | (number | string)[] | null,
-    space?: string | number
+    space?: string | number,
   ): string {
     return JSON.stringify(this.toArray(), replacer, space);
   }
 
   forEach(
-    callback: (value: T, index: number, collection: IQueue<T>) => void
+    callback: (value: T, index: number, collection: IQueue<T>) => void,
   ): void {
     let index = 0;
     for (const value of this) callback(value, index++, this);
   }
 
   map<U>(
-    mapper: (value: T, index: number, collection: IQueue<T>) => U
+    mapper: (value: T, index: number, collection: IQueue<T>) => U,
   ): IQueue<U> {
     const mappedQueue = new Queue<U>(this.capacity);
     this.forEach((value, index) => {
@@ -120,7 +121,7 @@ export default class Queue<T> implements IQueue<T> {
   }
 
   filter(
-    predicate: (value: T, index: number, collection: IQueue<T>) => boolean
+    predicate: (value: T, index: number, collection: IQueue<T>) => boolean,
   ): IQueue<T> {
     const filteredQueue = new Queue<T>(this.capacity);
     this.forEach((value, index) => {
@@ -130,7 +131,7 @@ export default class Queue<T> implements IQueue<T> {
   }
 
   some(
-    predicate: (value: T, index: number, collection: IQueue<T>) => boolean
+    predicate: (value: T, index: number, collection: IQueue<T>) => boolean,
   ): boolean {
     let index = 0;
     for (const value of this) {
@@ -141,7 +142,7 @@ export default class Queue<T> implements IQueue<T> {
   }
 
   every(
-    predicate: (value: T, index: number, collection: IQueue<T>) => boolean
+    predicate: (value: T, index: number, collection: IQueue<T>) => boolean,
   ): boolean {
     let index = 0;
     for (const value of this) {
@@ -156,9 +157,9 @@ export default class Queue<T> implements IQueue<T> {
       accumulator: U,
       value: T,
       index: number,
-      collection: IQueue<T>
+      collection: IQueue<T>,
     ) => U,
-    initialValue: U
+    initialValue: U,
   ): U {
     let accumulator = initialValue;
     let index = 0;
@@ -170,7 +171,7 @@ export default class Queue<T> implements IQueue<T> {
   }
 
   find(
-    predicate: (value: T, index: number, collection: IQueue<T>) => boolean
+    predicate: (value: T, index: number, collection: IQueue<T>) => boolean,
   ): T {
     let index = 0;
     for (const value of this) {
@@ -181,7 +182,7 @@ export default class Queue<T> implements IQueue<T> {
   }
 
   findIndex(
-    predicate: (value: T, index: number, collection: IQueue<T>) => boolean
+    predicate: (value: T, index: number, collection: IQueue<T>) => boolean,
   ): number {
     let index = 0;
     for (const value of this) {

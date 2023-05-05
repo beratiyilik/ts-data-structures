@@ -1,6 +1,7 @@
-import { IStack } from "../interface/stack.ts";
-import { SinglyNode } from "./../node/index.ts";
-import { deepClone } from "./../util/index.ts";
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+import { IStack } from '../interface/stack';
+import { SinglyNode } from './../node/index';
+import { deepClone } from './../util/index';
 
 // LIFO: last-in-first-out
 export default class Stack<T> implements IStack<T> {
@@ -89,15 +90,15 @@ export default class Stack<T> implements IStack<T> {
     replacer?: (
       this: any,
       key: string,
-      value: any
+      value: any,
     ) => any | (number | string)[] | null,
-    space?: string | number
+    space?: string | number,
   ): string {
     return JSON.stringify(this.toArray(), replacer, space);
   }
 
   forEach(
-    callback: (value: T, index: number, collection: IStack<T>) => void
+    callback: (value: T, index: number, collection: IStack<T>) => void,
   ): void {
     let index = 0;
     for (const value of this) {
@@ -107,7 +108,7 @@ export default class Stack<T> implements IStack<T> {
   }
 
   map<U>(
-    mapper: (value: T, index: number, collection: IStack<T>) => U
+    mapper: (value: T, index: number, collection: IStack<T>) => U,
   ): IStack<U> {
     const mappedStack = new Stack<U>(this.capacity);
     this.forEach((value, index) => {
@@ -117,7 +118,7 @@ export default class Stack<T> implements IStack<T> {
   }
 
   filter(
-    predicate: (value: T, index: number, collection: IStack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean,
   ): IStack<T> {
     const filteredStack = new Stack<T>(this.capacity);
     this.forEach((value, index) => {
@@ -127,7 +128,7 @@ export default class Stack<T> implements IStack<T> {
   }
 
   some(
-    predicate: (value: T, index: number, collection: IStack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean,
   ): boolean {
     let index = 0;
     for (const value of this) {
@@ -138,7 +139,7 @@ export default class Stack<T> implements IStack<T> {
   }
 
   every(
-    predicate: (value: T, index: number, collection: IStack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean,
   ): boolean {
     let index = 0;
     for (const value of this) {
@@ -153,9 +154,9 @@ export default class Stack<T> implements IStack<T> {
       accumulator: U,
       value: T,
       index: number,
-      collection: IStack<T>
+      collection: IStack<T>,
     ) => U,
-    initialValue: U
+    initialValue: U,
   ): U {
     let accumulator = initialValue;
     let index = 0;
@@ -167,7 +168,7 @@ export default class Stack<T> implements IStack<T> {
   }
 
   find(
-    predicate: (value: T, index: number, collection: IStack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean,
   ): T {
     let index = 0;
     for (const value of this) {
@@ -178,7 +179,7 @@ export default class Stack<T> implements IStack<T> {
   }
 
   findIndex(
-    predicate: (value: T, index: number, collection: IStack<T>) => boolean
+    predicate: (value: T, index: number, collection: IStack<T>) => boolean,
   ): number {
     let index = 0;
     for (const value of this) {

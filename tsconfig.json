@@ -1,27 +1,36 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ES2020",
-    "lib": [
-      "ES2020"
-    ],
-    "moduleResolution": "node",
+    /* basic settings */
     "rootDir": "./src",
     "outDir": "./dist",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node16",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    /* advanced settings */
+    "lib": ["ES2020"],
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    /* declaration (d.ts) settings */
     "declaration": true,
-    "emitDeclarationOnly": true,
+    // "emitDeclarationOnly": true, // Only emit d.ts files
+    "declarationMap": true,
+    /* compiling errors and restrictions */
     "strict": true,
     "strictNullChecks": false,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "allowImportingTsExtensions": true
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "skipLibCheck": true
+    /* others */
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

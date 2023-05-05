@@ -17,7 +17,7 @@ export interface ICloneable<T> {
 export interface IComparable<ValueType, CollectionType> {
   equals(
     other: CollectionType,
-    comparer?: (a: ValueType, b: ValueType) => boolean
+    comparer?: (a: ValueType, b: ValueType) => boolean,
   ): boolean;
 }
 
@@ -26,9 +26,9 @@ export interface IStringifiable {
     replacer?: (
       this: any,
       key: string,
-      value: any
+      value: any,
     ) => any | (number | string)[] | null,
-    space?: string | number
+    space?: string | number,
   ): string;
 }
 
@@ -43,37 +43,37 @@ export interface ICollection<T>
   isFull(): boolean;
   toArray(): T[];
   forEach(
-    callback: (value: T, index: number, collection: ICollection<T>) => void
+    callback: (value: T, index: number, collection: ICollection<T>) => void,
   ): void;
 }
 
 export interface ICollectionOperations<T> {
   map<U>(
-    mapper: (value: T, index: number, collection: ICollection<T>) => U
+    mapper: (value: T, index: number, collection: ICollection<T>) => U,
   ): ICollection<U>;
   filter(
-    predicate: (value: T, index: number, collection: ICollection<T>) => boolean
+    predicate: (value: T, index: number, collection: ICollection<T>) => boolean,
   ): ICollection<T>;
   some(
-    predicate: (value: T, index: number, collection: ICollection<T>) => boolean
+    predicate: (value: T, index: number, collection: ICollection<T>) => boolean,
   ): boolean;
   every(
-    predicate: (value: T, index: number, collection: ICollection<T>) => boolean
+    predicate: (value: T, index: number, collection: ICollection<T>) => boolean,
   ): boolean;
   reduce<U>(
     reducer: (
       accumulator: U,
       value: T,
       index: number,
-      collection: ICollection<T>
+      collection: ICollection<T>,
     ) => U,
-    initialValue: U
+    initialValue: U,
   ): U;
   find(
-    predicate: (value: T, index: number, collection: ICollection<T>) => boolean
+    predicate: (value: T, index: number, collection: ICollection<T>) => boolean,
   ): T | null;
   findIndex(
-    predicate: (value: T, index: number, collection: ICollection<T>) => boolean
+    predicate: (value: T, index: number, collection: ICollection<T>) => boolean,
   ): number;
 }
 

@@ -1,7 +1,7 @@
-import { IPriorityQueue } from "../interface/index.ts";
-import { PriorityDoublyNode } from "./../node/index.ts";
-import { deepClone } from "./../util/index.ts";
-import { Queue } from "./index.ts";
+import { IPriorityQueue } from '../interface/index';
+import { PriorityDoublyNode } from './../node/index';
+import { deepClone } from './../util/index';
+import { Queue } from './index';
 
 // priority queue
 export default class PriorityQueue<T>

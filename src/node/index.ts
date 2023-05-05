@@ -3,7 +3,7 @@ import {
   IPriorityDoublyNode,
   ISinglyNode,
   ITripleNode,
-} from "../interface/node.ts";
+} from '../interface/node';
 
 export class SinglyNode<T> implements ISinglyNode<T> {
   value: T;
@@ -23,7 +23,7 @@ export class DoublyNode<T> implements IDoublyNode<T> {
   constructor(
     value: T,
     prev: DoublyNode<T> | null = null,
-    next: DoublyNode<T> | null = null
+    next: DoublyNode<T> | null = null,
   ) {
     this.value = value;
     this.prev = prev;
@@ -41,7 +41,7 @@ export class PriorityDoublyNode<T> implements IPriorityDoublyNode<T> {
     value: T,
     priority: number,
     prev: PriorityDoublyNode<T> | null = null,
-    next: PriorityDoublyNode<T> | null = null
+    next: PriorityDoublyNode<T> | null = null,
   ) {
     this.value = value;
     this.priority = priority;
@@ -60,7 +60,7 @@ export class TripleNode<T> implements ITripleNode<T> {
     value: T,
     parent: TripleNode<T> | null = null,
     left: TripleNode<T> | null = null,
-    right: TripleNode<T> | null = null
+    right: TripleNode<T> | null = null,
   ) {
     this.value = value;
     this.parent = parent;

@@ -1,4 +1,4 @@
-import { IValue, IPriority } from "./common.ts";
+import { IValue, IPriority } from './common';
 
 export interface ISinglyNode<T> extends IValue<T> {
   next: ISinglyNode<T> | null;
