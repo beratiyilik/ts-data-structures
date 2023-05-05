@@ -1,6 +1,6 @@
 {
   "name": "@beratiyilik/ts-data-structures",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "description": "TypeScript Data Structures is a collection of efficient and type-safe data structures and algorithms implemented in TypeScript.",
   "keywords": [
     "data structures",
