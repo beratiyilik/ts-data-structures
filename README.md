@@ -5,6 +5,11 @@ This TypeScript library provides implementations of commonly used data structure
 
 [![npm version](https://img.shields.io/npm/v/@beratiyilik/ts-data-structures.svg?style=flat)](https://www.npmjs.com/package/@beratiyilik/ts-data-structures)
 
+> **Warning**
+> This project is currently in its **beta stage** and not yet ready for production use. Users are welcome to test the available beta releases and provide feedback. However, please be prepared for potential bugs and limitations at this stage.
+
+> Stay tuned for further updates and a production-ready release!
+
 ## Table of Contents
 
 - [Tech Stack](#tech-stack)
@@ -26,7 +31,7 @@ This TypeScript library provides implementations of commonly used data structure
 
 ## Current Status
 
-The project is still in the development phase. Currently, the following data structures have been implemented:
+The project is still in the development phase. Currently, the following data structures and helper functions have been implemented:
 
 - Stack
 - Queue
