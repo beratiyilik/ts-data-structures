@@ -24,6 +24,20 @@ export default class LinkedList<T> implements ILinkedList<T> {
     }
   }
 
+  *keys(): IterableIterator<number> {
+    let index = 0;
+    for (const _ of this) yield index++;
+  }
+
+  *values(): IterableIterator<T> {
+    for (const value of this) yield value;
+  }
+
+  *entries(): IterableIterator<[number, T]> {
+    let index = 0;
+    for (const value of this) yield [index++, value];
+  }
+
   insertAtBeginning(value: T): boolean {
     if (this.isFull()) return false;
 

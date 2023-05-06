@@ -6,6 +6,18 @@ export interface Iterable<T> {
   [Symbol.iterator](): Iterator<T, any, undefined>;
 }
 
+export interface IKeys<KeyType> {
+  keys(): IterableIterator<KeyType>;
+}
+
+export interface IValues<T> {
+  values(): IterableIterator<T>;
+}
+
+export interface IEntries<KeyType, ValueType> {
+  entries(): IterableIterator<[KeyType, ValueType]>;
+}
+
 export interface IPriority {
   priority: number;
 }
@@ -34,6 +46,9 @@ export interface IStringifiable {
 
 export interface ICollection<T>
   extends Iterable<T>,
+    IKeys<number>,
+    IValues<T>,
+    IEntries<number, T>,
     ICloneable<ICollection<T>>,
     IComparable<T, ICollection<T>>,
     IStringifiable {

@@ -24,6 +24,20 @@ export default class Stack<T> implements IStack<T> {
     }
   }
 
+  *keys(): IterableIterator<number> {
+    let index = 0;
+    for (const _ of this) yield index++;
+  }
+
+  *values(): IterableIterator<T> {
+    for (const value of this) yield value;
+  }
+
+  *entries(): IterableIterator<[number, T]> {
+    let index = 0;
+    for (const value of this) yield [index++, value];
+  }
+
   push(data: T): boolean {
     if (this.isFull()) return false;
     const newNode = new SinglyNode<T>(data, this.head);
